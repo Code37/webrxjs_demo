@@ -10,8 +10,8 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'menu', component: MenuComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: 'dishdetail', component: DishdetailComponent },
+  { path: 'contactus',     component: ContactComponent },
+  { path: 'dishdetail/:id', component: DishdetailComponent },
   // default location
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
