@@ -19,6 +19,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material';
 
+// React
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
@@ -62,7 +67,11 @@ import { LoginComponent } from './login/login.component';
     MatFormFieldModule,
     MatCheckboxModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    // React
+    MatSelectModule,
+    MatSlideToggleModule,
+    ReactiveFormsModule
   ],
   providers: [DishService, PromotionService, LeaderService],
   bootstrap: [AppComponent],
