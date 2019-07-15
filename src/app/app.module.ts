@@ -13,8 +13,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule, MatDialogModule, MatFormFieldModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material';
 
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
@@ -55,10 +58,11 @@ import { LoginComponent } from './login/login.component';
     MatCardModule,
     MatButtonModule,
     // login
-    MatDialogModule,
+    MatInputModule,
     MatFormFieldModule,
     MatCheckboxModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ],
   providers: [DishService, PromotionService, LeaderService],
   bootstrap: [AppComponent],
