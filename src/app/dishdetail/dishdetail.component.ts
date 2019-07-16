@@ -86,6 +86,8 @@ export class DishdetailComponent implements OnInit {
     },
   };
 
+  errMess: string;
+
   constructor(private dishservice: DishService,
               private route: ActivatedRoute,
               private location: Location,
@@ -95,10 +97,19 @@ export class DishdetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    const id = this.route.snapshot.params.id;
-    this.dishservice.getDish(id).subscribe(dish => this.dish = dish);
+    this.createForm();
+    // const id = this.route.snapshot.params.id;
+    // this.dishservice.getDish(id).subscribe(
+    //   dish => this.dish = dish,
+    //   errmess => this.errMess = errmess as any);
+
     // this.dish = this.dishservice.getDish(id);
-    this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
+
+    this.dishservice.getDishIds().subscribe(
+      dishIds => this.dishIds = dishIds,
+      errmess => this.errMess = errmess as any
+    );
+    // This is for the picture slide route with image id.
     this.route.params.pipe(switchMap((params: Params) => this.dishservice.getDish(params.id)))
       .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); });
   }
