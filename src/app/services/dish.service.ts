@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Dish } from '../shared/dish';
 // tslint:disable-next-line:import-spacing
-import  { DISHES } from '../shared/dishes';
+// import  { DISHES } from '../shared/dishes';
 // import { Observable, of } from 'rxjs';
 import { map, delay } from 'rxjs/operators';
 import {HttpClient, HttpHeaders} from '@angular/common/http';

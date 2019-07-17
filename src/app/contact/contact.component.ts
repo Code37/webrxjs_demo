@@ -1,11 +1,19 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback, ContactType } from '../shared/feedback';
+import {expand, flyInOut} from '../animations/app.animation';
+import {FeedbackService} from '../services/feedback.service';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
+  // tslint:disable-next-line:no-host-metadata-property
+  host: {
+    '[@flyInOut]': 'true',
+    style: 'display: block;'
+  },
+  animations: [flyInOut(), expand()]
 })
 export class ContactComponent implements OnInit {
   // Angular8 https://angular.io/guide/static-query-migration
@@ -21,6 +29,8 @@ export class ContactComponent implements OnInit {
     telnum: '',
     email: ''
   };
+
+  private errMess: string;
 
   validationMessages = {
     firstname: {
@@ -43,7 +53,9 @@ export class ContactComponent implements OnInit {
     },
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private feedbackservice: FeedbackService,
+              @Inject('BaseURL') private baseURL) {
     this.createForm();
   }
 
@@ -61,8 +73,7 @@ export class ContactComponent implements OnInit {
       message: ''
     });
 
-    this.feedbackForm.valueChanges
-      .subscribe(data => this.onValueChanged(data));
+    this.feedbackForm.valueChanges.subscribe(data => this.onValueChanged(data));
 
     this.onValueChanged(); // (re)set validation messages now
 }
@@ -70,6 +81,13 @@ export class ContactComponent implements OnInit {
   onSubmit() {
     this.feedback = this.feedbackForm.value;
     console.log(this.feedback);
+
+    // PUT HTTP method for dish
+    this.feedbackservice.submitFeedback(this.feedback).subscribe(
+      feedback => { this.feedback = feedback; },
+      errmess => { this.feedback = null; this.errMess = errmess as any; });
+
+    // Reset the form
     this.feedbackForm.reset({
       firstname: '',
       lastname: '',
