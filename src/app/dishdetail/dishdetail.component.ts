@@ -93,18 +93,21 @@ export class DishdetailComponent implements OnInit {
     this.comment = this.commentForm.value;
     this.comment.date = new Date().toISOString();
     console.log(this.comment);
-    this.dish.comments.push(this.comment);
+    // this.dish.comments.push(this.comment);
+
+    // PUT HTTP method for dish
+    this.dishcopy.comments.push(this.comment);
+    this.dishservice.putDish(this.dishcopy).subscribe(
+      dish => { this.dish = dish; this.dishcopy = dish; },
+      errmess => { this.dish = null; this.dishcopy = null; this.errMess = errmess as any; });
+
+    // Reset the form
     this.commentForm.reset({
       author: '',
       rating: 5,
       comment: '',
     });
     this.commentFormDirective.resetForm();
-    // PUT HTTP method for dish
-    this.dishcopy.comments.push(this.comment);
-    this.dishservice.putDish(this.dishcopy).subscribe(
-        dish => { this.dish = dish; this.dishcopy = dish; },
-        errmess => { this.dish = null; this.dishcopy = null; this.errMess = errmess as any; });
   }
 
   onValueChanged(data?: any) {
