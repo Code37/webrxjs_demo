@@ -29,7 +29,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
-import { ProcessHTTPMsgService } from './services/process-httpmsg.service'
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -45,6 +45,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { baseURL } from './shared/baseurl';
 import { HighlightDirective } from './directives/highlight.directive';
 import {FeedbackService} from './services/feedback.service';
+import { MarketChartComponent } from './market-chart/market-chart.component';
+import {MarketStatusService} from './services/market-status.service';
 
 
 @NgModule({
@@ -58,7 +60,8 @@ import {FeedbackService} from './services/feedback.service';
     HomeComponent,
     ContactComponent,
     LoginComponent,
-    HighlightDirective
+    HighlightDirective,
+    MarketChartComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +90,7 @@ import {FeedbackService} from './services/feedback.service';
     // server
     HttpClientModule
   ],
-  providers: [DishService, PromotionService, LeaderService, ProcessHTTPMsgService, FeedbackService,
+  providers: [DishService, PromotionService, LeaderService, ProcessHTTPMsgService, FeedbackService, MarketStatusService,
     {provide: 'BaseURL', useValue: baseURL}
   ],
   bootstrap: [AppComponent],
